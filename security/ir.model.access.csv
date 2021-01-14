@@ -1,0 +1,6 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_airline_admin,access_airline_admin,model_airline_module,base.group_system,1,1,1,1
+access_departure_admin,access_departure_admin,model_departure_airport,base.group_system,1,1,1,1
+access_arrival_admin,access_arrival_admin,model_arrival_airport,base.group_system,1,1,1,1
+access_passengers_admin,access_passengers_admin,model_passengers_details,base.group_system,1,1,1,1
+access_multi_admin,access_multi_admin,model_multi_details,base.group_system,1,1,1,1

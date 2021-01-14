@@ -1,0 +1,209 @@
+<odoo>
+    <data>
+
+        <template id="report_ticket">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+
+                        <div class="page">
+
+                            <table class="table table-sm" style="page-break-inside: avoid;">
+                                <tr>
+                                    <td>
+                                        <div class="col-auto mw-100 mb-2"
+                                             color="#17a2b8">
+                                            <strong>Ticket ID:</strong>
+                                            <span t-field="o.my_sequence_air"/>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <div class="col-auto mw-100 mb-2"
+                                             color="#17a2b8">
+                                            <strong>Ticket Type:</strong>
+                                            <span t-field="o.ticket_type"/>
+                                        </div>
+                                    </td>
+                                    <t t-foreach="o.departure_airport" t-as="line">
+                                    <td>
+
+                                        <div class="col-auto mw-100 mb-2"
+                                             color="#17a2b8">
+                                            <strong>Departure Airport:</strong>
+                                            <span t-field="line.dep_airport_name"/>
+                                        </div>
+                                    </td>
+                                     <td>
+
+                                        <div class="col-auto mw-100 mb-2"
+                                             color="#17a2b8">
+                                            <strong>Country:</strong>
+                                            <span t-field="line.location"/>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <div class="col-auto mw-100 mb-2"
+                                             color="#17a2b8">
+                                            <strong>City:</strong>
+                                            <span t-field="line.city"/>
+                                        </div>
+                                    </td>
+                                    </t>
+                                    <t t-foreach="o.arrival_airport" t-as="line">
+                                    <td>
+
+                                        <div class="col-auto mw-100 mb-2"
+                                             color="#17a2b8">
+                                            <strong>Arrival Airport:</strong>
+                                            <span t-field="line.arrival_airport_name"/>
+                                        </div>
+                                    </td>
+                                     <td>
+
+                                        <div class="col-auto mw-100 mb-2"
+                                             color="#17a2b8">
+                                            <strong>Country:</strong>
+                                            <span t-field="line.a_location"/>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <div class="col-auto mw-100 mb-2"
+                                             color="#17a2b8">
+                                            <strong>City:</strong>
+                                            <span t-field="line.a_city"/>
+                                        </div>
+                                    </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <td>
+
+                                        <div class="col-auto mw-100 mb-2"
+                                             color="#17a2b8">
+                                            <strong>Depart Date:</strong>
+                                            <span t-field="o.depart_date"/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-auto mw-100 mb-2"
+                                             color="#17a2b8">
+                                            <strong>Arrival Date</strong>
+                                            <span t-field="o.arrive_date"/>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <div class="col-auto mw-100 mb-2"  color="#17a2b8"
+                                             name="No. of Cylinders">
+                                            <strong>Class:</strong>
+                                            <span t-field="o.Class"/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-auto mw-100 mb-2"
+                                             name="Manufacturing Date"
+                                             color="#17a2b8">
+                                            <strong>Your Bill:</strong>
+                                            <span t-field="o.total_cost"/>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <table class="table table-sm" style="page-break-inside: avoid;">
+                                <thead>
+                                    <tr>
+
+                                        <t t-set="colspan" t-value="6"/>
+                                        <th name="th_Multi-City" class="center">
+                                            <span>Adults:</span>
+                                        </th>
+
+                                        <th name="th_Arrival_Airport" class="center">
+                                            <span>Children:</span>
+                                        </th>
+                                        <th name="th_Arrival_Airport" class="center">
+                                            <span>Infants:</span>
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="No_passengers_body">
+                                    <t t-foreach="o.passengers_details" t-as="line">
+                                        <tr>
+
+                                            <td>
+                                                <span t-field="line.adults_count"
+                                                      />
+                                            </td>
+                                            <td class="center">
+                                                <span t-field="line.children_count"/>
+                                            </td>
+                                            <td class="center">
+                                                <span t-field="line.infant_count"/>
+                                            </td>
+
+
+                                        </tr>
+
+
+                                    </t>
+                                </tbody>
+                            </table>
+<!--                            <table class="table table-sm" style="page-break-inside: avoid;">-->
+<!--                                <thead>-->
+<!--                                    <tr>-->
+
+<!--                                        <t t-set="colspan" t-value="6"/>-->
+<!--                                        <th name="th_Multi-City" class="center">-->
+<!--                                            <span>Departure Airport</span>-->
+<!--                                        </th>-->
+
+<!--                                        <th name="th_Arrival_Airport" class="center">-->
+<!--                                            <span>Arrival Airport:</span>-->
+<!--                                        </th>-->
+<!--                                        <th name="th_Arrival_Airport" class="center">-->
+<!--                                            <span>Departure Date:</span>-->
+<!--                                        </th>-->
+
+<!--                                    </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody class="Multi_City_body" t-if="o.add_city">-->
+<!--                                    <t t-foreach="o.add_city" t-as="line">-->
+<!--                                        <tr>-->
+
+<!--                                            <td class="center" t-if="o.departure_airport2">-->
+<!--                                                <span t-field="line.departure_airport2"-->
+<!--                                                      />-->
+<!--                                            </td>-->
+<!--                                            <td class="center" t-if="o.arrival_airport2">-->
+<!--                                                <span t-field="line.arrival_airport2"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="center" t-if="o.departure_date">-->
+<!--                                                <span t-field="line.departure_date"/>-->
+<!--                                            </td>-->
+
+
+<!--                                        </tr>-->
+
+
+<!--                                    </t>-->
+<!--                                </tbody>-->
+<!--                            </table>-->
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+
+
+</odoo>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--        <record id="sale_order_inherit" model="ir.ui.view">-->
+<!--            <field name="name">sale.order.ihnerit</field>-->
+<!--            <field name="model">sale.order</field>-->
+<!--            <field name="inherit_id" ref="sale.view_order_form"/>-->
+<!--            <field name="priority">12</field>-->
+<!--            <field name="arch" type="xml"/>-->
+<!--        </record>-->
+
+
+
+
+        <record id="airline_auto_generate_sequence" model="ir.sequence">
+            <field name="name">Airline auto generate sequence</field>
+            <field name="code">airline.auto.generate.sequence</field>
+            <field name="prefix">BOOKING.AIR/%(range_year)s/</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
+            <field eval="False" name="company_id"/>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="action_airline" model="ir.actions.act_window">
+            <field name="name">Airline</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">airline.module</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!--        <record id="action_airlinemodule" model="ir.actions.act_window">-->
+        <!--            <field name="name">Airline</field>-->
+        <!--            <field name="type">ir.actions.act_window</field>-->
+        <!--            <field name="res_model">airline.module</field>-->
+        <!--            <field name="view_mode">tree,form</field>-->
+        <!--        </record>-->
+
+        <record id="view_airline_module" model="ir.ui.view">
+            <field name="name">custom.airline.tree</field>
+            <field name="model">airline.module</field>
+            <field name="arch" type="xml">
+                <tree string="Booking List">
+                    <field name="my_sequence_air"/>
+                    <field name="ticket_type"/>
+                    <field name="departure_airport"/>
+                    <field name="depart_date"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="action_form">
+            <field name="name">airline.custom.form</field>
+            <field name="model">airline.module</field>
+            <field name="arch" type="xml">
+                <form class="o_lead_opportunity_form">
+
+                    <header>
+                        <button name="create_sale_order" string="Book" type="object" class="oe_highlight"/>
+                        <button name="cancel_button" string="Discard" class="btn-primary" special="cancel"/>
+                    </header>
+
+                    <sheet>
+                        <separator style="color:black;font-weight:bold;font-size:28px;" string="Ticket Information"
+                                   colspan="4"/>
+                        <group col="4" colspan="12">
+                            <field name="my_sequence_air" readonly="1"/>
+                            <field name ="customer_name"/>
+                            <field name="partner_id"/>
+                            <field name="ticket_type"/>
+                            <field name="arrive_date" attrs="{'invisible': [('ticket_type', '!=', 'return')]}"/>
+                            <field name="departure_airport"/>
+                            <field name="arrival_airport"/>
+                            <field name="depart_date"/>
+                            <field name="arrive_date"/>
+                            <field name="Class"/>
+                            <field name="date_of_booking"/>
+                            <field name="my_dates"/>
+                            <field name="total_cost"/>
+                            <!--                            <field name="Billing_type"/>-->
+                            <!--                            <field name="Class_bill"/>-->
+                            <field name="mul" invisible="1"/>
+
+
+                        </group>
+                        <notebook>
+                            <page string="Passenger Details">
+                                <field name="passengers_details">
+                                    <tree editable="bottom">
+                                        <!--                                        <field name="passenger_id"/>-->
+                                        <field name="partner_id" />
+                                        <field name="adults_count" invisible="1"/>
+                                        <field name="children_count" invisible="1"/>
+                                        <field name="infant_count" invisible="1"/>
+                                        <field name="passenger_name"/>
+                                        <field name="passenger_age"/>
+                                        <field name="qty_of_passenger" readonly="1"/>
+                                        <field name="type_passenger"/>
+                                        <field name="unit_price"/>
+                                        <field name="Total_price"/>
+<!--                                        <field name="product_id_air"/>-->
+
+
+                                    </tree>
+                                </field>
+
+
+                            </page>
+                            <page string="Add a Flight">
+                                <field name="add_city" attrs="{'invisible': [('ticket_type', '!=', 'multi_city')]}">
+                                    <tree editable="bottom">
+                                        <field name="departure_airport2"/>
+                                        <field name="arrival_airport2"/>
+                                        <field name="departure_date"/>
+                                        <field name="trip_id"/>
+
+                                    </tree>
+                                </field>
+
+
+                            </page>
+                        </notebook>
+
+
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+
+                </form>
+            </field>
+        </record>
+
+
+
+        <menuitem id="menu_airline" name="Ticket Booking"
+
+                  sequence="11"/>
+        <menuitem name="Air Booking" id="ums_airline_reservation"
+                  parent="menu_airline"
+                  sequence="2" action="action_airline"/>
+
+    </data>
+
+</odoo>

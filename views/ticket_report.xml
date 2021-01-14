@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            string="Ticket Details"
+            id="action_report_ticket"
+            model="airline.module"
+            report_type="qweb-html"
+            name="airline.report_ticket"
+            file="airline.report_ticket"
+        />
+
+    </data>
+</odoo>

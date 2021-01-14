@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- project task wizard -->
+        <record model="ir.ui.view" id="airline_detailslogs_wizard_view">
+            <field name="name">ticket.details</field>
+            <field name="model">ticket.details</field>
+            <field name="arch" type="xml">
+                <form string="Select">
+                    <group colspan="2" string="Select Date Report">
+                        <group>
+                            <field name="depart_dates"/>
+                            <field name="arrival_dates"/>
+                        </group>
+                    <footer>
+                        <button name="print_report" string="Print Report"
+                                type="object" default_focus="1" class="oe_highlight" icon="fa-print"/>
+                        <button string="Cancel" class="btn-default" special="cancel" icon="fa-times"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="airline_report_action_nw" model="ir.actions.act_window">
+            <field name="name">Ticket report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ticket.details</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem name="Ticket report"
+                  id="menu_report_ticket_details"
+                  action="airline_report_action_nw"
+                  parent="menu_report_ticket_details"
+                  sequence="6"
+        />
+
+    </data>
+</odoo>
